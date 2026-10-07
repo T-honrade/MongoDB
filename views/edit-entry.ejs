@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Edit Entry - Ginhawa</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <div class="auth-card">
+
+            <h1>Edit Entry</h1>
+
+            <form
+                action="/entries/update/<%= entry._id %>"
+                method="POST"
+            >
+
+                <label>Activity</label>
+
+                <input
+                    type="text"
+                    name="activity"
+                    value="<%= entry.activity %>"
+                    required
+                >
+
+                <label>Mood</label>
+
+                <select name="mood" required>
+
+                    <option
+                        value="Happy"
+                        <%= entry.mood === "Happy" ? "selected" : "" %>
+                    >
+                        Happy
+                    </option>
+
+                    <option
+                        value="Calm"
+                        <%= entry.mood === "Calm" ? "selected" : "" %>
+                    >
+                        Calm
+                    </option>
+
+                    <option
+                        value="Good"
+                        <%= entry.mood === "Good" ? "selected" : "" %>
+                    >
+                        Good
+                    </option>
+
+                    <option
+                        value="Tired"
+                        <%= entry.mood === "Tired" ? "selected" : "" %>
+                    >
+                        Tired
+                    </option>
+
+                    <option
+                        value="Stressed"
+                        <%= entry.mood === "Stressed" ? "selected" : "" %>
+                    >
+                        Stressed
+                    </option>
+
+                </select>
+
+                <label>Notes</label>
+
+                <textarea
+                    name="notes"
+                ><%= entry.notes || "" %></textarea>
+
+                <button type="submit">
+                    Update Entry
+                </button>
+
+            </form>
+
+            <p class="bottom-text">
+                <a href="/entries/dashboard">
+                    ← Back to Dashboard
+                </a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

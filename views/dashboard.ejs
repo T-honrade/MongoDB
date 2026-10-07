@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard - Ginhawa</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <nav>
+
+        <div class="logo">
+            Ginhawa
+        </div>
+
+        <div class="nav-links">
+
+            <span>
+                Hello, <%= user.name %>
+            </span>
+
+            <a href="/auth/logout">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+    <main class="dashboard">
+
+        <section class="dashboard-header">
+
+            <h1>
+                My Wellness Journal
+            </h1>
+
+            <p>
+                Record something that helped you feel better today.
+            </p>
+
+        </section>
+
+        <section class="entry-form">
+
+            <h2>Add Wellness Entry</h2>
+
+            <form
+                action="/entries/create"
+                method="POST"
+            >
+
+                <label>Activity</label>
+
+                <input
+                    type="text"
+                    name="activity"
+                    placeholder="Example: Walking"
+                    required
+                >
+
+                <label>Mood</label>
+
+                <select name="mood" required>
+
+                    <option value="">
+                        Select your mood
+                    </option>
+
+                    <option value="Happy">
+                        Happy
+                    </option>
+
+                    <option value="Calm">
+                        Calm
+                    </option>
+
+                    <option value="Good">
+                        Good
+                    </option>
+
+                    <option value="Tired">
+                        Tired
+                    </option>
+
+                    <option value="Stressed">
+                        Stressed
+                    </option>
+
+                </select>
+
+                <label>Notes</label>
+
+                <textarea
+                    name="notes"
+                    placeholder="Write something about your day..."
+                ></textarea>
+
+                <button type="submit">
+                    Save Entry
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="entries">
+
+            <h2>My Entries</h2>
+
+            <% if (entries.length === 0) { %>
+
+                <div class="empty">
+                    You don't have any wellness entries yet.
+                </div>
+
+            <% } %>
+
+            <% entries.forEach(entry => { %>
+
+                <div class="entry-card">
+
+                    <div>
+
+                        <h3>
+                            <%= entry.activity %>
+                        </h3>
+
+                        <p>
+                            Mood:
+                            <strong>
+                                <%= entry.mood %>
+                            </strong>
+                        </p>
+
+                        <% if (entry.notes) { %>
+
+                            <p>
+                                <%= entry.notes %>
+                            </p>
+
+                        <% } %>
+
+                        <small>
+                            <%= new Date(
+                                entry.createdAt
+                            ).toLocaleString() %>
+                        </small>
+
+                    </div>
+
+                    <div class="entry-actions">
+
+                        <a
+                            href="/entries/edit/<%= entry._id %>"
+                            class="edit-button"
+                        >
+                            Edit
+                        </a>
+
+                        <form
+                            action="/entries/delete/<%= entry._id %>"
+                            method="POST"
+                        >
+
+                            <button
+                                type="submit"
+                                class="delete-button"
+                                onclick="return confirm('Delete this entry?')"
+                            >
+                                Delete
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </section>
+
+    </main>
+
+</body>
+</html>

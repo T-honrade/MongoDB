@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Ginhawa</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <nav>
+        <div class="logo">Ginhawa</div>
+
+        <div class="nav-links">
+            <% if (user) { %>
+
+                <a href="/entries/dashboard">Dashboard</a>
+                <a href="/auth/logout">Logout</a>
+
+            <% } else { %>
+
+                <a href="/auth/login">Login</a>
+                <a href="/auth/register">Register</a>
+
+            <% } %>
+        </div>
+    </nav>
+
+    <main class="hero">
+
+        <div class="hero-content">
+
+            <p class="small-title">
+                PERSONAL WELLNESS TRACKER
+            </p>
+
+            <h1>
+                Welcome to Ginhawa
+            </h1>
+
+            <p>
+                A simple space to record your daily activities,
+                mood, and personal wellness journey.
+            </p>
+
+            <% if (user) { %>
+
+                <a
+                    href="/entries/dashboard"
+                    class="button"
+                >
+                    Go to Dashboard
+                </a>
+
+            <% } else { %>
+
+                <a
+                    href="/auth/register"
+                    class="button"
+                >
+                    Get Started
+                </a>
+
+            <% } %>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
